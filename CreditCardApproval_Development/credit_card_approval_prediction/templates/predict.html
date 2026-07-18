@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Check Eligibility — Credit Card Approval Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand"><a href="{{ url_for('home') }}">Credit Card Approval Prediction</a></div>
+  </nav>
+
+  <main class="form-page">
+    <h1>Applicant Details</h1>
+    <p>Enter the applicant's details below to get an instant approval / rejection prediction.</p>
+
+    <form method="POST" action="{{ url_for('predict') }}" class="applicant-form">
+      <div class="form-grid">
+        <label>Gender
+          <select name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </label>
+
+        <label>Owns a Car?
+          <select name="own_car" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+
+        <label>Owns Real Estate?
+          <select name="own_realty" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+
+        <label>Number of Children
+          <input type="number" name="cnt_children" min="0" max="10" value="0" required>
+        </label>
+
+        <label>Age (years)
+          <input type="number" name="age_years" min="18" max="100" value="30" required>
+        </label>
+
+        <label>Annual Income
+          <input type="number" step="0.01" name="annual_income" min="0" value="60000" required>
+        </label>
+
+        <label>Income Type
+          <select name="income_type" required>
+            {% for opt in income_types %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label>Employment Duration (years)
+          <input type="number" step="0.1" name="employment_years" min="0" value="3" required>
+        </label>
+
+        <label>Education Level
+          <select name="education_type" required>
+            {% for opt in education_types %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label>Family Status
+          <select name="family_status" required>
+            {% for opt in family_statuses %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label>Housing Type
+          <select name="housing_type" required>
+            {% for opt in housing_types %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label>Family Members (count)
+          <input type="number" name="cnt_fam_members" min="1" max="15" value="2" required>
+        </label>
+
+        <label>Existing Loan Balance
+          <input type="number" step="0.01" name="existing_loan_balance" min="0" value="2000" required>
+        </label>
+
+        <label>Credit Inquiries (last 6 months)
+          <input type="number" name="credit_inquiries_6m" min="0" max="20" value="1" required>
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn">Get Prediction</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>Credit Card Approval Prediction &middot; Flask + Scikit-learn + XGBoost + IBM Watson ML</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Credit Card Approval Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand">Credit Card Approval Prediction</div>
+  </nav>
+
+  <header class="hero">
+    <h1>Instant, Data-Driven Credit Card Approval Decisions</h1>
+    <p>
+      This system uses machine learning — trained on historical applicant data —
+      to predict whether a credit card application is likely to be approved or rejected,
+      helping analysts, compliance officers, and customers get a fast, consistent answer.
+    </p>
+    <a class="cta" href="{{ url_for('predict') }}">Check Eligibility &rarr;</a>
+  </header>
+
+  <section class="info-cards">
+    <div class="card">
+      <h3>Automated Screening</h3>
+      <p>Analysts get an instant approval/rejection prediction instead of manual review.</p>
+    </div>
+    <div class="card">
+      <h3>Risk Flagging</h3>
+      <p>High-risk applicants are automatically flagged for compliance review.</p>
+    </div>
+    <div class="card">
+      <h3>Self-Service Check</h3>
+      <p>Prospective customers can check their eligibility before formally applying.</p>
+    </div>
+  </section>
+
+  {% if model_meta %}
+  <section class="model-info">
+    <p>Current model in production: <strong>{{ model_meta.best_model_name }}</strong>
+       (accuracy: {{ "%.1f"|format(model_meta.accuracy * 100) }}%)</p>
+  </section>
+  {% endif %}
+
+  <footer>
+    <p>Credit Card Approval Prediction &middot; Flask + Scikit-learn + XGBoost + IBM Watson ML</p>
+  </footer>
+</body>
+</html>

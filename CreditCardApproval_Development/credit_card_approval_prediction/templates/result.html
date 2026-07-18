@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result — Credit Card Approval Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand"><a href="{{ url_for('home') }}">Credit Card Approval Prediction</a></div>
+  </nav>
+
+  <main class="result-page">
+    {% if error %}
+      <h1>Something went wrong</h1>
+      <p class="error">{{ error }}</p>
+    {% else %}
+      <h1>Prediction Result</h1>
+      <div class="result-badge {{ 'approved' if result == 'Approved' else 'rejected' }}">
+        {{ result }}
+      </div>
+      {% if probability is not none %}
+      <p>Model confidence: <strong>{{ "%.1f"|format(probability * 100) }}%</strong></p>
+      {% endif %}
+      <p class="model-used">Prediction made using: {{ model_name }}</p>
+    {% endif %}
+
+    <a class="cta" href="{{ url_for('predict') }}">&larr; Try Another Application</a>
+  </main>
+
+  <footer>
+    <p>Credit Card Approval Prediction &middot; Flask + Scikit-learn + XGBoost + IBM Watson ML</p>
+  </footer>
+</body>
+</html>
